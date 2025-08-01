@@ -35,25 +35,19 @@ que () { printf -v _N %$1s; _N=(${_N// / 1}); printf "${!_N[*]}"; } #|
 # beer mug
 clear
 echo '
- #==|    |
-((  |    |
- \\ |    |
-   &|    |
-    ======
+
+  #==|    |
+ ((  |    |
+  \\ |    |
+    &|    |
+     ======
+
 '
 
-printf "$COF"
-
 spr=(⡀ ⠂)
-
-XY 5 1 "$BWHT      $DEF"
-XY 6 2  "$BWHT    $DEF"
-for   i in {3..5}; {
-XY 6 $i "$BYLW    $DEF"
-}
-
 clr=(
     ''
+    $DEF
     $BWHT
     $BWHT
     $BYLW
@@ -63,24 +57,31 @@ clr=(
 
 buble(){
     s=0.0$((RANDOM%7+3))
-    x=$((RANDOM%4+6))
-    for y in {5..1}; {
+    x=$((RANDOM%4+7))
+    for y in {6..2}; {
         XY $x $y ${clr[y]}${blk}${spr[0]}
         sleep $s
         XY $x $y ${clr[y]}${blk}${spr[1]}
         sleep $s
-        XY $x $((y-1)) ${clr[y-1]}${blk}${spr[0]}
-        XY $x   $y     ${clr[y]}" "
-        sleep $s
+        XY $x $y ${clr[y]}" "
     }
 }
 
+printf "$COF"
+
+# fill
+for  y in {6..2}; {
+    XY 7 $y "${clr[y]}    $DEF"
+    sleep 0.1
+};  XY 6 $y "${clr[y]}      $DEF"
+
+# bubles
 for i in {1..5}; do
     buble & buble & buble
 done
 wait
 
 # end
-XY 1 6 "$CON"
+XY 1 8 "$CON"
 
 #⠁⠂⠃⠄⠅⠆⠇⠈⠉⠐⠑⠒⠓⠔⠕⠖⠗⠘⠙⠠⠡⠢⠣⠤⠥⠦⠧⠨⠩⠰⠱⠲⠳⠴⠵⠶⠷⠸⠹⡁⡂⡃⡄⡅⡆⡇⡈⡉⡐⡑⡒⡓⡔⡕⡖⡗⡘⡙⡠⡡⡢⡣⡤⡥⡦⡧⡨⡩⡰⡱⡲⡳⡴⡵⡶⡷⡸⡹⢀⢁⢂⢃⢄⢅⢆⢇⢈⢉⢐⢑⢒⢓⢔⢕⢖⢗⢘⢙
